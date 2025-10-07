@@ -521,7 +521,13 @@ main {
   z-index: 50;
 }
 .Header-principaleNav-link {
-  margin-right: 1em;
+  margin-right: 3em;
+}
+.Header-principaleNav-link:hover {
+  background-color: rgba(179, 0, 167, 0.4509803922);
+  border-radius: 70px;
+  height: 70px;
+  width: 70px;
 }
 .Header-secondaryNav-link {
   display: none;
@@ -540,6 +546,11 @@ main {
     grid-row: 1/3;
     grid-column: 1/2;
   }
+  .Header-logoBox-name {
+    color: #b300a7;
+    display: block;
+    font-weight: bolder;
+  }
   .Header-principaleNav {
     position: static;
     background-color: transparent;
@@ -552,6 +563,15 @@ main {
     flex-direction: row;
     grid-row: 2/3;
     grid-column: 2/3;
+    padding: 0 20px;
+    border-radius: 40px;
+    box-shadow: 0 10px 40px #E8DEF8;
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+    position: relative;
+    margin: 0 5%;
+    height: 40px;
   }
   .Header-secondaryNav-burger {
     display: none;
@@ -559,12 +579,24 @@ main {
   .Header-secondaryNav-link {
     display: block;
     margin-left: 2em;
+    margin-top: 10px;
+  }
+  .Header-secondaryNav-link:hover {
+    -webkit-text-decoration: underline rgba(179, 0, 167, 0.4509803922);
+            text-decoration: underline rgba(179, 0, 167, 0.4509803922);
+    color: rgba(179, 0, 167, 0.4509803922);
   }
   .Header-userMenu {
     grid-row: 1/3;
     grid-column: 3/4;
+    position: relative;
   }
   .Header-userMenu-links {
     display: none;
+  }
+  .Header-userMenu-links:active {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
   }
 }/*# sourceMappingURL=style.css.map */
