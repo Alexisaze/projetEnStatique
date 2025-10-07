@@ -1,0 +1,218 @@
+const indicator = document.querySelector('.nav-indicator');
+const items = document.querySelectorAll('.nav-item');
+
+function handleIndicator(el) {
+  // Boucler sur items -> retirer la classe "is-active"
+  items.forEach(item => {
+    item.classList.remove('is-active');
+    item.removeAttribute('style');
+  })
+
+  const elementColor = el.dataset.activeColor;
+  const target = el.dataset.target;
+
+  // Styliser l'indicateur
+  indicator.style.width = `${el.offsetWidth}px`;
+  indicator.style.backgroundColor = elementColor;
+  indicator.style.left = `${el.offsetLeft}px`;
+
+  // Ajout la classe is-active
+  el.classList.add('is-active');
+  el.style.color = elementColor;
+}
+
+items.forEach((item, index) => {
+  item.addEventListener('click', e => {
+    handleIndicator(e.target)
+  });
+  item.classList.contains('is-active') && handleIndicator(item);
+});
+
+
+//burger-menu
+var sidenav = document.getElementById("mySidenav");
+var openBtn = document.getElementById("openBtn");
+var closeBtn = document.getElementById("closeBtn");
+
+openBtn.onclick = openNav;
+closeBtn.onclick = closeNav;
+
+/* Set the width of the side navigation to 250px */
+function openNav() {
+  sidenav.classList.add("active");
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  sidenav.classList.remove("active");
+}
+
+ // Tableau pour stocker les fichiers uploadés
+     const uploadedFiles = [];
+     // Variable pour stocker l’image choisie (img1 / img2)
+     let selectedImageId = null;
+
+     function dragstartHandler(ev) {
+       ev.dataTransfer.setData("text/plain", ev.target.id);
+     }
+
+     function dragoverHandler(ev) {
+       ev.preventDefault();
+     }
+
+     function dropHandler(ev) {
+       ev.preventDefault();
+
+       const files = ev.dataTransfer.files;
+       if (files.length > 0) {
+         for (const file of files) {
+           if (file.type.startsWith("image/")) {
+             const img = document.createElement("img");
+             img.src = URL.createObjectURL(file);
+             img.style.maxWidth = "100px";
+             img.style.maxHeight = "100px";
+             document.getElementById("preview").appendChild(img);
+
+             // Stocke dans le tableau
+             uploadedFiles.push(file);
+           }
+         }
+         return;
+       }
+
+       // Cas image de la page
+       const data = ev.dataTransfer.getData("text/plain");
+       if (data) {
+         const draggedImg = document.getElementById(data);
+         if (draggedImg) {
+           const clone = draggedImg.cloneNode(true);
+           ev.target.innerHTML = "";
+           ev.target.appendChild(clone);
+           selectedImageId = data; // On mémorise l’image choisie
+         }
+       }
+     }
+
+     function validate() {
+       const formData = new FormData();
+
+       // Ajoute les fichiers uploadés
+       uploadedFiles.forEach((file, index) => {
+         formData.append("uploadedFile" + index, file);
+       });
+
+       // Ajoute l’image choisie (img1 / img2)
+       if (selectedImageId) {
+         formData.append("selectedImageId", selectedImageId);
+       }
+
+       fetch("/validate", {
+         method: "POST",
+         body: formData
+       })
+       .then(response => response.text())
+       .then(data => {
+         console.log("Serveur:", data);
+         alert("Images envoyees avec succes !");
+       })
+       .catch(error => {
+         console.error("Erreur lors de l’envoi:", error);
+       });
+     }
+
+     function showLightbox(img) {
+         document.getElementById("lightbox-img").src = img.src;
+         document.getElementById("lightbox").style.display = "flex";
+       }
+
+       function closeLightbox() {
+         document.getElementById("lightbox").style.display = "none";
+       }
+
+
+//-----------------------------------------------------------------------------
+//Profil
+
+let ratings = [5, 4, 4];
+      let comments = [
+        {text: "👍 Très bon vendeur, rapide et efficace !", rating: 5},
+        {text: "⭐ Produit conforme à la description.", rating: 4},
+        {text: "👌 Je recommande fortement.", rating: 4}
+      ];
+      let currentRating = 0;
+
+      function renderComments() {
+        const list = document.getElementById("commentsList");
+//        list.innerHTML = "";
+//        comments.forEach((c, index) => {
+//          const div = document.createElement("div");
+//          div.className = "comment";
+//          div.innerHTML = `<span>${"⭐".repeat(c.rating)} - ${c.text}</span>
+//                           <button class="delete-btn" onclick="deleteComment(${index})">🗑️</button>`;
+//          list.appendChild(div);
+//        });
+//        document.getElementById("opinionsCount").textContent = comments.length;
+//      }
+
+      function updateProfile() {
+        const name = document.getElementById("nameInput").value;
+        const role = document.getElementById("roleInput").value;
+        const pic = document.getElementById("picInput").value;
+
+        if (name) document.getElementById("profileName").textContent = name;
+        if (role) document.getElementById("profileRole").textContent = role;
+        if (pic) document.getElementById("profilePic").style.backgroundImage = `url(${pic})`;
+      }
+
+      // Sélection étoiles
+      document.querySelectorAll(".star").forEach(star => {
+        star.addEventListener("click", function() {
+          currentRating = parseInt(this.getAttribute("data-value"));
+          document.querySelectorAll(".star").forEach(s => s.classList.remove("active"));
+          for (let i=0; i<currentRating; i++) {
+            document.querySelectorAll(".star")[i].classList.add("active");
+          }
+        });
+      });
+
+      function addFeedback() {
+        const commentText = document.getElementById("commentInput").value;
+        if (!currentRating || !commentText.trim()) {
+          alert("Veuillez donner une note et écrire un commentaire !");
+          return;
+        }
+
+        comments.push({text: commentText, rating: currentRating});
+        ratings.push(currentRating);
+        renderComments();
+        updateNote();
+
+        // Reset
+        document.getElementById("commentInput").value = "";
+        document.querySelectorAll(".star").forEach(s => s.classList.remove("active"));
+        currentRating = 0;
+      }
+
+      function deleteComment(index) {
+        // Supprimer le commentaire et la note associée
+        ratings.splice(index, 1);
+        comments.splice(index, 1);
+        renderComments();
+        updateNote();
+      }
+
+      function updateNote() {
+        if (ratings.length === 0) {
+          document.getElementById("profileNote").textContent = "Aucune note";
+          return;
+        }
+        const avg = (ratings.reduce((a,b)=>a+b,0)/ratings.length).toFixed(1);
+        const rounded = Math.round(avg);
+        const stars = "⭐".repeat(rounded) + "☆".repeat(5 - rounded);
+        document.getElementById("profileNote").textContent = `${stars} (${avg})`;
+      }
+
+      // Initialisation
+      renderComments();
+      updateNote();
+}
