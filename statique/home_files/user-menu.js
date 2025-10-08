@@ -1,18 +1,21 @@
+alert('bibi');
 // Selection du DOM
-const userLogin = document.querySelector(".usernav");
-const showHideUser = document.querySelector(".showHideUser");
+const userBox = document.querySelector(".Header-userMenu");
+console.log("Test userBox", userBox)
+const userIcon = document.querySelector(".Header-userMenu-avatar");
+console.log("test userIcon", userIcon)
 
 // Ecouteur de clic sur icon:
-showHideUser.addEventListener("click", () => {
-    userLogin.classList.toggle("open");
+userIcon.addEventListener("click", () => {
+    userBox.classList.toggle("open");
 });
 
-document.addEventListener("click", function (event) {
-    const userLogin = document.querySelector(".usernav");
-    const showHideUser = document.querySelector(".showHideUser");
+// showHideUser.addEventListener("click", function (event) {
+//     const userLogin = document.querySelector(".usernav");
+//     const showHideUser = document.querySelector(".showHideUser");
 
-    // Si le clic est à l'extérieur de usernav
-    if (!userLogin.contains(event.target)) {
-        userLogin.classList.remove("open");
-    }
-});
+//     // Si le clic est à l'extérieur de usernav
+//     if (!userLogin.contains(event.target)) {
+//         userLogin.classList.remove("open");
+//     }
+// });

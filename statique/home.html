@@ -22,32 +22,35 @@
 
         <header class="Header">
             <figure class="Header-logoBox">
-                <img src="img/logo.jpg" alt="" class="Header-logoBox-img">
+                <a th:href="@{/home}"><img src="img/logo.jpg" class="Header-logoBox-img" alt=""></a>
                 <figcaption class="Header-logoBox-name">
                     Coin partitions
                 </figcaption>
             </figure>
-            <nav class="Header-principaleNav">
-                <a href="" class="Header-principaleNav-link"><img src="img/favorite.png" alt=""></a>
-                <a href="" class="Header-principaleNav-link"><img src="img/Mail.png" alt=""></a>
-                <a href="" class="Header-principaleNav-link"><img src="img/partoches.png" alt=""></a>
-                <a href="" class="Header-principaleNav-link"><img src="img/add.png" alt=""></a>
+            <nav class="Header-principaleNav ">
+                <a href="#" class="Header-principaleNav-link"><img src="img/favorite.png" alt=""></a>
+                <a th:href="@{/chatpage}" class="Header-principaleNav-link"><img src="img/Mail.png" alt=""></a>
+                <a href="#" class="Header-principaleNav-link"><img src="img/partoches.png" alt=""></a>
+                <a th:href="@{/editAnnounce}" class="Header-principaleNav-link"><img src="img/add.png" alt=""></a>
             </nav>
-            <nav class="Header-secondaryNav">
+            <div class="Header-secondaryNav open">
                 <img class="Header-secondaryNav-burger" src="img/burger.png" alt="">
-                <a href="" class="Header-secondaryNav-link">muscial score</a>
-                <a href="" class="Header-secondaryNav-link">choregraphic score</a>
-                <a href="" class="Header-secondaryNav-link">call for tender</a>
-                <a href="" class="Header-secondaryNav-link">news</a>
-            </nav>
-            <div class="Header-userMenu">
+                <nav class="Header-secondaryNav-boxLinks">
+                    <a th:href="@{/product-cards}" class="Header-secondaryNav-link">Muscial score</a>
+                    <a href="#" class="Header-secondaryNav-link">Choregraphic score (Work-in-progress)</a>
+                    <a href="#" class="Header-secondaryNav-link">Call for tender (Work-in-progress)</a>
+                    <a th:href="@{/info}" class="Header-secondaryNav-link">About</a>
+                    <a th:href="@{/contact}" class="Header-secondaryNav-link">Contact</a>
+                </nav>
+
+            </div>
+            <div class="Header-userMenu open">
                 <img src="img/avatar.png" alt="" class="Header-userMenu-avatar">
                 <nav class="Header-userMenu-links">
-                    <a href="" class="Header-userMenu-links-link">link</a>
-                    <a href="" class="Header-userMenu-links-link">link</a>
-                    <a href="" class="Header-userMenu-links-link">link</a>
-                    <a href="" class="Header-userMenu-links-link">link</a>
-                    <a href="" class="Header-userMenu-links-link">link</a>
+                    <a th:href="@{/login}" class="Header-userMenu-links-link">Login/Disconnect</a>
+                    <a th:href="@{/followingScores}" class="Header-userMenu-links-link">my Dashboard</a>
+                    <a href="#" class="Header-userMenu-links-link">Modify Product</a>
+                    <a th:href="@{/editProfil}" class="Header-userMenu-links-link">Modify Profil</a>
                 </nav>
             </div>
 
@@ -81,9 +84,44 @@
                 </div>
             </div>
             <div class="inside">
-                <div class="icon"><i class="material-icons">new</i></div>
+                <div class="icon"><i class="material-icons">
+                        <h3 class="material-icons-title">new</h3>
+                    </i></div>
                 <div class="contents">
                     <table>
+                        <caption>
+                            Info utilisateur
+                        </caption>
+                        <thead>
+                            <tr>
+                                <td><img src="" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Seller</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Chris</th>
+                                <td>je suis... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident
+                                    nostrum, culpa dicta tenetur non blanditiis, quasi nobis porro ea deserunt officia
+                                    soluta dolorum doloribus vitae sapiente dignissimos eius aliquid pariatur.</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Note : </th>
+                                <td>*****/5</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Avis : </th>
+                                <td><a href="#" class="link-underline">(22)</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="row" colspan="2">Me contacter : </th>
+                                <td><a href="#" class="link-underline">ici</a></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -102,9 +140,44 @@
                 </div>
             </div>
             <div class="inside">
-                <div class="icon"><i class="material-icons">best</i></div>
+                <div class="icon"><i class="material-icons">
+                        <h3 class="material-icons-title">best</h3>
+                    </i></div>
                 <div class="contents">
                     <table>
+                        <caption>
+                            Info utilisateur
+                        </caption>
+                        <thead>
+                            <tr>
+                                <td><img src="" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Seller :</th>
+                                <th scope="col">Marc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>je suis... Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus
+                                    voluptates ipsa, illo officiis totam nihil, harum dolore laborum commodi ipsam
+                                    dolorem sunt veniam similique voluptatem error ratione ab impedit temporibus.</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Note : </th>
+                                <td>*****/5</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Avis : </th>
+                                <td><a href="#" class="link-underline">(22)</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="row" colspan="2">Me contacter : </th>
+                                <td><a href="#" class="link-underline">ici</a></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -117,8 +190,8 @@
             ©2025
         </footer>
     </div>
-    <script src="./home_files/interaction.js"></script>
-    <script src="./home_files/user-menu.js"></script>
+    <script src="home_files/interaction.js"></script>
+    <script src="home_files/user-menu.js"></script>
     <!-- <script src="..\static\script\interaction.js"></script> -->
 
 
